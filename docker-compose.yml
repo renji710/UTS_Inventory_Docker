@@ -1,0 +1,56 @@
+services:
+  
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: inventory_uts
+    restart: unless-stopped
+    working_dir: /var/www/html 
+    volumes:
+      - ./src:/var/www/html:delegated 
+      # - /var/www/html/vendor 
+    depends_on:
+      - db
+    networks:
+      - inventory_network
+
+  web:
+    image: nginx:alpine
+    container_name: inventory_web
+    restart: unless-stopped
+    ports:
+      - "8000:80" 
+    volumes:
+      - ./src:/var/www/html:delegated
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf 
+    depends_on:
+      - app 
+    networks:
+      - inventory_network
+
+  db:
+    image: mysql:8.0
+    container_name: inventory_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-inventory_uts} 
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-12345}
+      # MYSQL_USER: ${DB_USERNAME:-user}
+      # MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - db_data:/var/lib/mysql 
+    ports:
+      - "33061:3306" 
+    networks:
+      - inventory_network
+
+networks:
+  inventory_network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

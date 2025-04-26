@@ -24,6 +24,7 @@ class SupplierSummary extends BaseWidget
                         'suppliers.name',
                         DB::raw('COUNT(items.id) as items_count'),
                         DB::raw('SUM(items.price * items.quantity) as total_value'),
+                        DB::raw('SUM(items.quantity) as total_units'),
                     ])
                     ->leftJoin('items', 'suppliers.id', '=', 'items.supplier_id')
                     ->groupBy('suppliers.id', 'suppliers.name')
@@ -37,6 +38,10 @@ class SupplierSummary extends BaseWidget
                     ->sortable(),
                 TextColumn::make('items_count')
                     ->label('Item Types Supplied')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('total_units')
+                    ->label('Total Units Supplied')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('total_value')

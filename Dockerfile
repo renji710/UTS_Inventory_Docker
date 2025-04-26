@@ -6,11 +6,20 @@ RUN apk add --no-cache \
     build-base linux-headers \
     $PHPIZE_DEPS \
     libzip-dev zlib-dev oniguruma-dev \
+    icu-dev \
     mariadb-client \
     libpng-dev libjpeg-turbo-dev freetype-dev libwebp-dev \
     curl git unzip
 
-RUN docker-php-ext-install pdo_mysql mbstring zip gd exif bcmath opcache
+RUN docker-php-ext-install \
+    pdo_mysql \
+    mbstring \
+    zip \
+    gd \
+    exif \
+    bcmath \
+    opcache \
+    intl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1

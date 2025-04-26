@@ -25,7 +25,7 @@ class LowStockItems extends BaseWidget
                     ->orderBy('quantity', 'asc') 
                     ->with(['category', 'supplier'])
             )
-            ->heading('Items with Low Stock (< ' . self::LOW_STOCK_THRESHOLD . ' Units)')
+            ->heading('Low Stock Items (< ' . self::LOW_STOCK_THRESHOLD . ' Units)')
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
