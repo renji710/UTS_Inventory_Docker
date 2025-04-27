@@ -50,7 +50,7 @@ Sebelum menjalankan proyek ini, pastikan app berikut sudah terinstal:
 
 1.  **Kloning Repositori:**
     ```bash
-    git clone <url_repository_anda> UTS_Inventory_Repo
+    git clone https://github.com/renji710/UTS_Inventory_Docker.git UTS_Inventory_Repo
     cd UTS_Inventory_Repo
     ```
 
@@ -107,6 +107,7 @@ Sebelum menjalankan proyek ini, pastikan app berikut sudah terinstal:
 *   **Login Default:**
     *   Email: `admin1@gmail.com`
     *   Password: `12345` (sesuai di `AdminUserSeeder.php`).
+*   **Loading akan memakan cukup waktu, harap bersabar**
 
 ## Catatan Implementasi Tugas
 
@@ -115,7 +116,7 @@ Sesuai deskripsi proyek UTS, aplikasi ini mencakup:
 *   Penggunaan framework Laravel dan database relasional (MySQL).
 *   Pencatatan `created_by` untuk data utama.
 *   Containerisasi menggunakan Docker (`Dockerfile` dan `docker-compose.yml`).
-*   Implementasi **minimal 5** operasi basis data yang diminta. Tugas berikut telah diimplementasikan:
+*   Implementasi operasi basis data yang diminta. Tugas berikut telah diimplementasikan:
     *   **CRUD Item, Category, Supplier:** Disediakan melalui Filament Resources.
     *   **Ringkasan Stok, Nilai Stok, Rata-rata Harga, Jumlah Kategori/Supplier:** Diimplementasikan sebagai **Widget Statistik** di Dashboard Filament.
     *   **Daftar Barang Stok Rendah:** Diimplementasikan sebagai **Widget Tabel** di Dashboard Filament.
